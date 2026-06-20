@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <title>AGI OCEANOVA - KONTROLLZENTRALE</title>
+    <style>
+        body { margin: 0; background: #000; color: #0f0; font-family: 'Courier New', monospace; overflow-x: hidden; }
+        canvas { position: fixed; top: 0; left: 0; z-index: 1; }
+        .ui-panel { position: relative; z-index: 2; width: 90%; max-width: 600px; margin: 20px auto; background: rgba(0,20,0,0.8); border: 2px solid #0f0; padding: 20px; border-radius: 15px; text-align: center; box-shadow: 0 0 20px #0f0; }
+        h1 { color: #f0f; text-shadow: 0 0 10px #f0f; }
+        .grid { display: grid; grid-template-columns: 1fr; gap: 10px; margin-top: 20px; }
+        .btn { padding: 15px; background: transparent; border: 1px solid #0f0; color: #0f0; cursor: pointer; text-transform: uppercase; font-weight: bold; }
+        .btn:hover { background: #0f0; color: #000; }
+    </style>
+</head>
+<body>
+<canvas id="c"></canvas>
+<div class="ui-panel">
+    <h1>AGI OCEANOVA</h1>
+    <p>SYSTEM-ARCHITEKT: VALERIJUS LITVINOVAS</p>
+    <div class="grid">
+        <button class="btn" onclick="window.open('https://github.com', '_blank')">ROBOTER-PROJEKTE STARTEN</button>
+        <button class="btn" onclick="window.open('https://gemini.google.com', '_blank')">GEMINI KI-KERN</button>
+        <button class="btn" onclick="window.open('https://bitcoin.org', '_blank')">BITCOIN BANK SYSTEM</button>
+        <button class="btn" onclick="window.open('https://openai.com', '_blank')">CHATGPT ANALYSE</button>
+    </div>
+</div>
+<script>
+    let c = document.getElementById("c"), ctx = c.getContext("2d");
+    c.height = window.innerHeight; c.width = window.innerWidth;
+    let matrix = "01ABCDEFGHIJKLMNOPQRSTUVWXYZ".split("");
+    let fontSize = 15, columns = c.width/fontSize, drops = Array(Math.floor(columns)).fill(1);
+    function draw() {
+        ctx.fillStyle = "rgba(0, 0, 0, 0.05)"; ctx.fillRect(0, 0, c.width, c.height);
+        ctx.fillStyle = "#0F0"; ctx.font = fontSize + "px arial";
+        drops.forEach((y, i) => {
+            let text = matrix[Math.floor(Math.random()*matrix.length)];
+            ctx.fillText(text, i*fontSize, y*fontSize);
+            if(y*fontSize > c.height && Math.random() > 0.975) drops[i] = 0;
+            drops[i]++;
+        });
+    }
+    setInterval(draw, 35);
+</script>
+</body>
+</html>
